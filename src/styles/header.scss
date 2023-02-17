@@ -1,0 +1,181 @@
+$header-menu-item-margin-x: 16px;
+$header-action-item-margin-x: 15px;
+
+:root {
+  --header-height: 60px;
+  --header-logo-width: 170px;
+}
+
+// header整體排版
+header.site-header {
+  position: sticky;
+  top: 0;
+  padding-left: var(--site-edge-margin);
+  padding-right: var(--site-edge-margin);
+  text-align: center;
+  background-color: inherit;
+  z-index: 100;
+
+  .header-container {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    max-width: 1100px;
+    height: var(--header-height);
+    background-color: inherit;
+  }
+}
+
+// nav排版
+nav.navbar-menu {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  background-color: inherit;
+
+  .nav-list {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    background-color: inherit;
+
+    .nav-link {
+      line-height: 24px;
+      color: var(--main-text);
+    }
+
+    .nav-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .nav-link,
+    .nav-icon {
+      &:hover,
+      &:active {
+        color: var(--secondary-text);
+      }
+    }
+
+    &.site-menu-list {
+      max-width: calc(50% - var(--header-logo-width) / 2 - #{$header-menu-item-margin-x} / 8);
+
+      .nav-item {
+        margin-left: $header-menu-item-margin-x;
+        margin-right: $header-menu-item-margin-x;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+
+    &.site-action-list {
+      max-width: calc(50% - var(--header-logo-width) / 2 - #{$header-menu-item-margin-x} / 8);
+
+        .nav-item {
+          margin-left: $header-menu-item-margin-x;
+          margin-right: $header-menu-item-margin-x;
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+    }
+  }
+}
+// logo
+.header-logo-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  height: var(--header-height);
+  width: var(--header-logo-width);
+  // display: flex;
+}
+
+//navbar-toggle 隱藏
+#navbar-toggle {
+  display: none;
+}
+label.burger-container {
+  display: none;
+}
+
+//mobile CSS
+@media screen and (max-width: $screen-break-point) {
+  :root {
+      --header-height: 56px;
+      --header-logo-width: 136px;
+  }
+  .site-header {
+    .burger-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+    }
+  }
+  nav.navbar-menu {
+    // background-color: lightcyan;
+    display: block;
+    margin-top: var(--header-height);
+    transform: scale(1,0);
+    opacity: 0;
+    transform-origin: top;
+    // 對多種屬性做轉場
+    transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out,
+      opacity 0.3s;
+
+    .nav-list {
+      justify-content: center;
+
+      .nav-item {
+        position: relative;
+        padding: 24px 0;
+
+        .nav-link {
+          display: block;
+        }
+      }
+      &.site-menu-list {
+        max-width: unset;
+        //只對site-menu-list裡面的項目direction: column
+        flex-direction: column;
+
+        .nav-item {
+          margin: 0;
+
+          // 偽元素
+          &::after {
+            content: "";
+            position: absolute;
+            left: 0 ;
+            right: 0;
+            bottom: 0;
+            border-bottom: 1px solid rgba(42, 42, 42, 0.1);
+          }
+
+          &:first-child {
+            padding-top: 0;
+          }
+          //客製商品移到最後
+          &:nth-child(4) {
+            order:1 ;
+          }
+        }
+      }
+      &.site-action-list {
+        max-width: unset;
+      }
+    }
+  }
+  // 透過Toggle開關
+  input#navbar-toggle:checked~nav.navbar-menu {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+}

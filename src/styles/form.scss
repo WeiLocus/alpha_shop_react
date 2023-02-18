@@ -1,0 +1,142 @@
+//用input-w-sm-xx調整RWD寬度
+@mixin input-width($prefix, $division) {
+  $form-full-width: 540;
+
+  @for $index from 1 to ($division + 1) {
+    .#{$prefix}-#{$index} {
+      width: 100% * (($index * 65 + ($index - 1) * 30) / $form-full-width);
+    }
+  }
+}
+//用input-w-sm-xx調整RWD寬度
+@media screen and (min-width: $screen-break-point) {
+  @include input-width('input-w-lg', 6);
+}
+
+@media screen and (max-width: $screen-break-point) {
+  $mobile-form-full-width: 346;
+
+  .input-w-sm-s1 {
+    width: 100% * 133 / $mobile-form-full-width;
+  }
+
+  .input-w-sm-s2 {
+    width: 100% * 183 / $mobile-form-full-width;
+  }
+
+  .input-w-sm-s3 {
+    width: 100% * 158 / $mobile-form-full-width;
+  }
+
+  .input-w-sm-full {
+    width: 100%;
+  }
+
+  main.site-main {
+    margin-top: 16px;
+  }
+}
+
+// form
+section.form-container {
+  margin-top: 64px;
+
+  .form-title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+  }
+}
+
+section.form-body {
+
+  .col {
+    justify-content: space-between;
+  }
+
+  .input-group {
+    margin-top: 24px;
+
+    .input-label {
+      margin-bottom: 8px;
+      color: var(--input-label);
+    }
+
+    select,
+    input {
+      width: 100%;
+      border-radius: 5px;
+      padding: 6px;
+      background-color: transparent;
+      border: 1px solid var(--input-border);
+      cursor: pointer;
+    }
+    input {
+      color: var(--input-text);
+    }
+    select {
+      color: var(--select-true);
+      background-color: transparent;
+
+      &:required:invalid {
+          color: var(--select-false);
+        }
+    }
+
+  }
+  // shippingForm
+  .radio-group {
+    // outline: 1px solid red;
+    position: relative;
+    // 取消對.col justify-content的設定
+    justify-content: unset;
+    margin-top: 24px;
+    padding: 10px 20px;
+    cursor: pointer;
+
+    input[type='radio'] {
+      width: 20px;
+      height: 20px;
+      margin-right: 20px;
+      cursor: pointer;
+      -webkit-appearance: none;
+      border: 1px solid #000;
+      border-radius: 50%;
+    }
+
+    input[type='radio']:checked {
+      box-shadow: inset 0 0 0 5px black;
+    }
+    .radio-box-border {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+    input[type='radio']~.radio-box-border {
+      border-radius: 5px;
+      border: 1px solid #ccccd0;
+    }
+
+    input[type='radio']:checked~.radio-box-border {
+      border: 1px solid #2A2A2A;
+    }
+
+    .radio-info {
+      display: flex;
+      flex-grow: 1;
+      flex-wrap: wrap;
+
+      .text {
+        font-size: 14px;
+        font-weight: normal;
+      }
+    }
+
+    #shipping-dhl ~ .radio-info .text {
+      font-weight: 700;
+    }
+  }
+}
+

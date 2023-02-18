@@ -13,7 +13,7 @@ header.site-header {
   padding-left: var(--site-edge-margin);
   padding-right: var(--site-edge-margin);
   text-align: center;
-  background-color: inherit;
+  background-color: var(--background-color);
   z-index: 100;
 
   .header-container {
@@ -54,6 +54,7 @@ nav.navbar-menu {
       &:hover,
       &:active {
         color: var(--secondary-text);
+        --main-text: var(--secondary-text);
       }
     }
 
@@ -103,7 +104,7 @@ label.burger-container {
   display: none;
 }
 
-//mobile CSS
+// mobile CSS
 @media screen and (max-width: $screen-break-point) {
   :root {
       --header-height: 56px;
@@ -120,7 +121,6 @@ label.burger-container {
     }
   }
   nav.navbar-menu {
-    // background-color: lightcyan;
     display: block;
     margin-top: var(--header-height);
     transform: scale(1,0);
@@ -136,6 +136,14 @@ label.burger-container {
       .nav-item {
         position: relative;
         padding: 24px 0;
+
+        &:active {
+          background-color: var(--active-color);
+
+          .nav-link {
+            color: var(--secondary-text);
+          }
+        }
 
         .nav-link {
           display: block;

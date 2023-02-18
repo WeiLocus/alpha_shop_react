@@ -1,6 +1,15 @@
 @import './reset.scss';
 @import './base.scss';
 @import './header.scss';
+@import './register.scss';
+@import './form.scss';
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Inter&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
+
+main.site-main {
+  margin-top: 80px;
+  padding-left: var(--site-edge-margin);
+  padding-right: var(--site-edge-margin);
+  background-color: inherit;
+}

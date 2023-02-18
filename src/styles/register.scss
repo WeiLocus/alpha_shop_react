@@ -26,15 +26,15 @@
       .text {
         display: flex;
         justify-content: center;
-          width: inherit;
-          height: inherit;
-          line-height: 20px;
-        }
+        width: inherit;
+        height: inherit;
+        line-height: 20px;
+      }
       
-        .icon {
-          width: inherit;
-          height: inherit;
-        }
+      .icon {
+        width: inherit;
+        height: inherit;
+      }
     }
     .progress-label {
       align-items: center;
@@ -52,5 +52,99 @@
     background-color: black;
     // border-width: 2px;
     // border-style: solid;
+  }
+}
+
+// ProgressControl
+//不增加Main範圍
+section.progress-control-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+section.button-group {
+  padding-top: 24px;
+  border-top: 1px solid #E6E6EB;
+
+  button {
+    display: flex;
+    align-items: center;
+    height: 46px;
+    border-radius: 8px;
+    border: none;
+    padding: 0;
+
+    .btn-action {
+      width: 24px;
+      height: 24px;
+    }
+
+    &.prev {
+      background-color: transparent;
+      color: #000000;
+      
+      > .btn-action {
+        margin-right: 12px;
+      }
+    }
+
+    &.next {
+      //自動填滿左邊
+      margin-left: auto;
+      justify-content: center;
+      width: 180px;
+      font-weight: 500;
+      background: var(--pink);
+      color: #FFFFFF;
+
+      > .btn-action {
+        margin-left: 12px;
+      }
+    }
+  }
+}
+
+//mobile CSS 
+@media (max-width:$screen-break-point) {
+  // StepProgress
+  section.progress-container {
+    margin-top: 24px;
+
+    .progress-group {
+      .progress-icon {
+        width: 32px;
+        height: 32px;
+        margin-right: 0;
+
+        .text {
+          line-height: 32px;
+        }
+      }
+    }
+    .progress-label {
+      display: none;
+    }
+  }
+  
+  // ProgressControl
+  section.progress-control-container {
+    //移到下方
+    position: relative;
+    margin-top: 24px;
+    margin-bottom: 40px;
+  }
+
+  section.button-group {
+    button.next {
+      width: 150px
+    }
+
+    &[data-phase='address'] {
+      button.next {
+        width: 100%;
+      }
+    }
   }
 }

@@ -93,7 +93,8 @@ nav.navbar-menu {
   margin: 0 auto;
   height: var(--header-height);
   width: var(--header-logo-width);
-  // display: flex;
+  display: flex;
+  align-items: center;
 }
 
 //navbar-toggle 隱藏

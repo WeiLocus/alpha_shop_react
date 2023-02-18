@@ -1,0 +1,123 @@
+section.cart-container {
+  margin-top: 166px;
+  padding: 0 24px;
+  border: 1px  solid #F0F0F5;
+  border-radius: 8px;
+
+  .cart-title {
+    margin: 32px 0;
+    font-weight: 700;
+    font-size: 18px;
+  }
+}
+
+section.product-list {
+  .product-container {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-bottom: 32px;
+
+    .img-container {
+      width: 100px;
+      height: 100px;
+      margin-right: 20px;
+    }
+
+    .product-info {
+      display: flex;
+      flex-wrap: wrap;
+      flex-grow: 1;
+      align-items: flex-start;
+
+      //定義width後，margin-right設為auto ，自動佔據了剩餘的全部寬度
+      .product-name {
+        max-width: 60%;
+        margin-right: auto;
+      }
+
+      .product-control-container {
+        width: 100%;
+        //移到最後
+        order: 1;
+      }
+
+      .product-control {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 120px;
+
+        .product-action {
+          display: inline-block;
+          width: 27px;
+          height: 26px;
+        }
+        
+        .product-count {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+section.cart-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  border-top: 1px solid #F0F0F5;
+
+  .text {
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--main-text);
+  }
+
+  .price {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+  }
+}
+
+// mobile CSS 
+@media (max-width: $screen-break-point) {
+  section.cart-container {
+    margin-top: 2rem;
+    padding-top: 20px;
+
+    .cart-title {
+      display: none;
+    }
+  }
+
+  section.product-list {
+    .product-container {
+      .product-info {
+        flex-direction: column;
+        align-items: flex-end;
+        flex-wrap: nowrap;
+
+        .product-name {
+          margin-right: unset;
+          max-width: unset;
+        }
+
+        .product-control-container {
+          width: auto;
+          order: unset;
+
+          .product-control {
+            margin: 16px 0;
+          }
+        }
+      }
+    }
+  }
+  section.cart-info {
+    padding-bottom: 16px;
+  }
+}

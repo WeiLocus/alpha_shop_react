@@ -3,6 +3,7 @@
 @import './header.scss';
 @import './register.scss';
 @import './form.scss';
+@import './cart.scss';
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Inter&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
@@ -12,4 +13,14 @@ main.site-main {
   padding-left: var(--site-edge-margin);
   padding-right: var(--site-edge-margin);
   background-color: inherit;
+
+  .main-container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto;
+
+  }
 }

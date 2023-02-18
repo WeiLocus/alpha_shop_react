@@ -1,0 +1,63 @@
+footer.site-footer {
+  position: relative;
+  bottom: 0;
+  margin-top: 120px;
+  padding-left: var(--site-edge-margin);
+  padding-right: var(--site-edge-margin);
+  background-color: var(--footer-background-color);
+
+  .footer-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto;
+
+    .footer-logo-container {
+      margin-top: 126px;
+      margin-bottom: 127px;
+    }
+  }
+
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+    margin-top: 64px;
+
+    .section-title {
+      font-weight: bold;
+      font-size: 1.5rem;
+      line-height: 1.5rem;
+      color: var(--main-text);
+    }
+
+    .section-content {
+      display: flex;
+      flex-direction: column;
+      margin-top: 1.5rem;
+      color: var(--secondary-text);
+      //改變所有顏色
+      & > * {
+        color: inherit;
+      }
+
+      .page-link {
+        margin-bottom: 8px;
+      }
+
+      .tel-info {
+        margin-bottom: 8px;
+      }
+
+      .social-icon {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: $screen-break-point) {
+  footer.site-footer {
+    display: none;
+  }
+}

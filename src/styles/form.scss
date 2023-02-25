@@ -91,7 +91,7 @@ section.form-body {
     // 取消對.col justify-content的設定
     justify-content: unset;
     margin-top: 24px;
-    padding: 10px 20px;
+    padding: 20px 20px;
     cursor: pointer;
 
     input[type='radio'] {
@@ -128,9 +128,11 @@ section.form-body {
       flex-grow: 1;
       flex-wrap: wrap;
 
+
       .text {
         font-size: 14px;
         font-weight: normal;
+        // line-height: 20px;
       }
     }
 

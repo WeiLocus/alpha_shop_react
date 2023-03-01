@@ -1,7 +1,7 @@
 import {ReactComponent as LeftArrow} from "assets/icons/left-arrow.svg"
 import {ReactComponent as RightArrow} from "assets/icons/right-arrow.svg"
 
-export default function ProgressControl ({phase ,onSwitchPhase, order, onBtnClick}) {
+export default function ProgressControl ({phase ,onSwitchPhase, onBtnClick}) {
   const handleBtnClick = (e) => {
     const btnPhase = e.target.parentElement.dataset.phase
     //control nextBtn

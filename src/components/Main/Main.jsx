@@ -3,21 +3,23 @@ import ProgressControl from "./ProgressControl"
 import Cart from "./Cart"
 import { useState } from 'react'
 
-import { CartContext, cartItems } from './CartContext'
+import { CartProvider } from './CartContext'
+import { CreditCardContext, creditCardDefault } from './StepProgress/CreditCardContext'
 export default function Main () {
   const [ phase, setPhase ] = useState('address')
   const handleStepButtonClick = (step) => {
     setPhase(step);
   }
-
   const [order, setOrder] = useState(1)
   const handleOrder = (order) => {
     setOrder(order);
   }
-  const [products,setProducts] = useState(cartItems)
+  const [creditCardInfo, setCreditCardInfo] = useState(creditCardDefault)
+
   return (
     <main className="site-main">
-      <CartContext.Provider value={[products,setProducts]}>
+      <CreditCardContext.Provider value={{creditCardInfo, setCreditCardInfo}}>
+      <CartProvider>
       <div className="main-container">
         <OrderPanel 
           phase={phase}
@@ -30,7 +32,8 @@ export default function Main () {
           order={order}
           onBtnClick={handleOrder}/>
       </div>
-    </CartContext.Provider>
+    </CartProvider>
+    </CreditCardContext.Provider>
     </main>
   )
 }

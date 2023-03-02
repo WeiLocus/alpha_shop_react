@@ -1,7 +1,25 @@
 import {ReactComponent as LeftArrow} from "assets/icons/left-arrow.svg"
 import {ReactComponent as RightArrow} from "assets/icons/right-arrow.svg"
+import { useContext } from "react"
+import { CartContext } from "./CartContext"
+import { CreditCardContext } from "./StepProgress/CreditCardContext"
 
 export default function ProgressControl ({phase ,onSwitchPhase, onBtnClick}) {
+  const  { cartLists }  = useContext(CartContext)
+  const  { creditCardInfo }   = useContext(CreditCardContext)
+
+  const totalPrice = cartLists.reduce((total,item) => {
+    return total + item.price * item.quantity
+  },0)
+  console.log('totalPrice:',totalPrice)
+
+  function handleBtnSubmit () {
+    const payment = `cardHolder: ${creditCardInfo.cardHolder}、cardNumber: ${creditCardInfo.cardNumber}、expireDate: ${creditCardInfo.expireDate}、cvc: ${creditCardInfo.cvc} `
+    console.log(`information,${payment}`)
+    // console.log(creditCardInfo)
+    console.log(`Price: $ ${totalPrice.toLocaleString()} 元`)
+  }
+
   const handleBtnClick = (e) => {
     const btnPhase = e.target.parentElement.dataset.phase
     //control nextBtn
@@ -29,9 +47,14 @@ export default function ProgressControl ({phase ,onSwitchPhase, onBtnClick}) {
   return (
     <section class="progress-control-container col col-lg-6 col-sm-12">
       <section class="button-group col col-12" data-phase={phase}>
-        {phase !== "address" && <PrevBtn onClick={handleBtnClick}/>}
-        {phase !== "credit-card" ?
-            <NextBtn onClick={handleBtnClick} />  : <button className="next">確認下單</button> }
+        {phase === "address" && <NextBtn onClick={handleBtnClick} />}
+        {phase === 'shipping' && 
+          <>
+          <PrevBtn onClick={handleBtnClick}/>
+          <NextBtn onClick={handleBtnClick} />  
+          </>
+        }
+        {phase === "credit-card" && <button className="next" onClick={handleBtnSubmit}>確認下單</button> }
       </section>
     </section> 
   )

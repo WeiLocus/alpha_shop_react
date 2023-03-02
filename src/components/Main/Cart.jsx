@@ -5,39 +5,19 @@ import { useContext } from 'react'
 import { CartContext } from "./CartContext"
 
 export default function Cart () {
-  const [products, setProducts] = useContext(CartContext)
+  const {cartLists,handleQuantityClick} = useContext(CartContext)
 
-  const totalPrice = products.reduce((total,item) => {
+  console.log(cartLists)
+  const totalPrice = cartLists.reduce((total,item) => {
+    console.log('item:',item)
     return total + item.price * item.quantity
   },0)
-
   // console.log('totalPrice:',totalPrice)
-
-  const  handleQuantityClick = (id, action) => {
-    const nextCartLists = products.map((item) => {
-      if (item.id === id) {
-        if (action === "add") {
-          return {
-            ...item,
-            quantity: item.quantity + 1
-          }
-        } else if (action === "minus") {
-          return {
-            ...item,
-            quantity: item.quantity - 1
-          }
-        }
-      }
-      return item
-    })
-    // 只顯示商品數量 > 1 的商品
-    setProducts(nextCartLists.filter((item) => item.quantity > 0 ))
-  }
 
   return (
     <section className="cart-container col col-lg-5 col-sm-12">
     <h3 className="cart-title">購物籃</h3>
-    <OrderItem items={products} handleQuantityClick={handleQuantityClick}/>
+    <OrderItem items={cartLists} handleQuantityClick={handleQuantityClick}/>
     <CartInfo totalPrice={totalPrice}/>
   </section>
   )

@@ -14,6 +14,15 @@ export default function Main () {
   const handleOrder = (order) => {
     setOrder(order);
   }
+
+  const [ shippingCost, setShippingCost ] = useState(0)
+  const handleShippingCost = (e) => {
+    if (e.target.id === 'shipping-dhl') {
+      setShippingCost(500)
+    } else if (e.target.id === 'shipping-standard') {
+      setShippingCost(0)
+    }
+  }
   const [creditCardInfo, setCreditCardInfo] = useState(creditCardDefault)
 
   return (
@@ -24,13 +33,15 @@ export default function Main () {
         <OrderPanel 
           phase={phase}
           order={order}
+          onShippingOption={handleShippingCost}
           />
-        <Cart />
+        <Cart shippingCost={shippingCost}/>
         <ProgressControl 
           phase={phase}
           onSwitchPhase={handleStepButtonClick}
           order={order}
-          onBtnClick={handleOrder}/>
+          onBtnClick={handleOrder}
+          shippingCost={shippingCost}/>
       </div>
     </CartProvider>
     </CreditCardContext.Provider>

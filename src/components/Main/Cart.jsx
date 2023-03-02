@@ -1,24 +1,23 @@
 import {ReactComponent as Plus} from "assets/icons/plus.svg"
 import {ReactComponent as Minus} from "assets/icons/minus.svg"
-import { cartItems } from "constants/cartData"
+// import { cartItems } from "constants/cartData"
 import { useContext } from 'react'
 import { CartContext } from "./CartContext"
 
-export default function Cart () {
+export default function Cart ({shippingCost}) {
   const {cartLists,handleQuantityClick} = useContext(CartContext)
-
-  console.log(cartLists)
+  
   const totalPrice = cartLists.reduce((total,item) => {
-    console.log('item:',item)
     return total + item.price * item.quantity
-  },0)
-  // console.log('totalPrice:',totalPrice)
+  },Number(shippingCost))
+  // console.log('total:',totalPrice)
 
   return (
     <section className="cart-container col col-lg-5 col-sm-12">
     <h3 className="cart-title">購物籃</h3>
     <OrderItem items={cartLists} handleQuantityClick={handleQuantityClick}/>
-    <CartInfo totalPrice={totalPrice}/>
+    <CartInfo totalPrice={totalPrice}
+    shippingCost={shippingCost}/>
   </section>
   )
 }
@@ -53,12 +52,12 @@ function OrderItem ({items, handleQuantityClick}) {
     )
 }
 
-function CartInfo ({totalPrice}) {
+function CartInfo ({totalPrice, shippingCost}) {
   return (
     <>
       <section className="cart-info shipping col col-12">
         <div className="text">運費</div>
-        <div className="price">免運</div>
+        <div className="price">{shippingCost === 500 ? `$ ${shippingCost}` : '免費'}</div>
       </section>
       <section className="cart-info total col col-12">
         <div className="text">小計</div>

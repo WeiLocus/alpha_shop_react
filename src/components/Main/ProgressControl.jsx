@@ -4,24 +4,29 @@ import { useContext } from "react"
 import { CartContext } from "./CartContext"
 import { CreditCardContext } from "./StepProgress/CreditCardContext"
 
-export default function ProgressControl ({phase ,onSwitchPhase, onBtnClick}) {
+export default function ProgressControl ({phase ,onSwitchPhase, onBtnClick, shippingCost }) {
   const  { cartLists }  = useContext(CartContext)
   const  { creditCardInfo }   = useContext(CreditCardContext)
 
   const totalPrice = cartLists.reduce((total,item) => {
     return total + item.price * item.quantity
-  },0)
-  console.log('totalPrice:',totalPrice)
+  },Number(shippingCost))
+  // console.log('totalPrice:',totalPrice)
 
-  function handleBtnSubmit () {
+  function handleBtnSubmit (e) {
     const payment = `cardHolder: ${creditCardInfo.cardHolder}、cardNumber: ${creditCardInfo.cardNumber}、expireDate: ${creditCardInfo.expireDate}、cvc: ${creditCardInfo.cvc} `
     console.log(`information,${payment}`)
     // console.log(creditCardInfo)
     console.log(`Price: $ ${totalPrice.toLocaleString()} 元`)
+    setTimeout( () => {
+      onSwitchPhase("address")
+      onBtnClick((order) => order - 2)
+    },1000)
   }
 
   const handleBtnClick = (e) => {
     const btnPhase = e.target.parentElement.dataset.phase
+    console.log(e.target)
     //control nextBtn
     if ( e.target.className === "next" && e.target.closest("button")) {
       if (btnPhase === "address") {
@@ -54,7 +59,12 @@ export default function ProgressControl ({phase ,onSwitchPhase, onBtnClick}) {
           <NextBtn onClick={handleBtnClick} />  
           </>
         }
-        {phase === "credit-card" && <button className="next" onClick={handleBtnSubmit}>確認下單</button> }
+        {phase === "credit-card" && 
+          <>
+          <PrevBtn onClick={handleBtnClick}/>
+          <button className="next" onClick={ (e) => handleBtnSubmit(e)}>確認下單</button> 
+          </>
+        }
       </section>
     </section> 
   )
